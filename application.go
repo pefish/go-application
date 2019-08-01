@@ -1,4 +1,4 @@
-package p_application
+package go_application
 
 
 type ApplicationClass struct {
