@@ -6,3 +6,5 @@ type ApplicationClass struct {
 }
 
 var Application = ApplicationClass{true}
+
+var OnTerminated = make(chan interface{})
