@@ -1,6 +1,11 @@
 package go_application
 
-import "context"
+import (
+	"context"
+	"os"
+	"os/signal"
+	"syscall"
+)
 
 type ApplicationClass struct {
 	Debug  bool
@@ -17,6 +22,13 @@ func (app *ApplicationClass) SetEnv(env string) {
 // 退出应用
 func (app *ApplicationClass) Exit() {
 	app.cancel()
+}
+
+// 等待退出信号
+func (app *ApplicationClass) WaitExitSignal() {
+	signalChan := make(chan os.Signal, 1)
+	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
+	<- signalChan
 }
 
 // 应用结束通道
